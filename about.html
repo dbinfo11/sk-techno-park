@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사무소 소개 | SK테크노파크 공인중개사</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .about-header {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            text-align: center;
+        }
+
+        .about-content {
+            padding: 80px 0;
+        }
+
+        .profile-section {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 80px;
+        }
+
+        .profile-image {
+            flex: 1;
+            max-width: 400px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--box-shadow);
+        }
+
+        .profile-info {
+            flex: 2;
+        }
+
+        .profile-title {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .profile-subtitle {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .highlight-text {
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .contact-card {
+            text-align: center;
+        }
+
+        .contact-card i {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .map-container {
+            margin-top: 80px;
+            width: 100%;
+            height: 400px;
+            background-color: var(--bg-secondary);
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            border: 1px solid var(--border-color);
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 반응형 */
+        @media (max-width: 768px) {
+            .profile-section {
+                flex-direction: column;
+            }
+
+            .profile-image {
+                margin: 0 auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 헤더 / 네비게이션 -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-building fa-2x" style="color: var(--accent-color);"></i>
+                <div class="logo-text">
+                    <span class="logo-main">SK테크노파크</span>
+                    <span class="logo-sub">공인중개사 사무소</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">홈</a>
+                <a href="about.html" class="active">사무소 소개</a>
+                <a href="cases.html">컨설팅 사례 및 홍보</a>
+            </nav>
+
+            <button class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="about-header">
+        <div class="container">
+            <h1 class="section-title fade-in">About Us</h1>
+            <p class="section-subtitle fade-in" style="transition-delay: 0.1s;">고객의 성공적인 비즈니스를 지원하는 SK테크노파크의 든든한 파트너</p>
+        </div>
+    </section>
+
+    <!-- 소개 본문 -->
+    <section class="about-content">
+        <div class="container">
+            <div class="profile-section fade-in">
+                <div class="profile-image">
+                    <!-- placeholder image -->
+                    <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&q=80&w=800"
+                        alt="박성준 소장">
+                </div>
+                <div class="profile-info">
+                    <h2 class="profile-title">박성준 <span
+                            style="font-size: 1.5rem; color: var(--text-muted); font-weight: normal;">소장</span></h2>
+                    <p class="profile-subtitle">Park Sung-June | 등록번호 48123-2020-00028</p>
+                    <p style="margin-bottom: 20px; font-size: 1.05rem;">
+                        안녕하세요. SK테크노파크 공인중개사 대표 박성준입니다.<br>
+                        창원 지역 산업단지와 <span class="highlight-text">SK테크노파크(넥스동, 메카동 등)</span>에 대한 깊은 이해와
+                        데이터를 바탕으로 최적의 공간 매칭 서비스를 제공합니다.
+                    </p>
+                    <p style="color: var(--text-secondary);">
+                        공장, 사무실, 상가 등 고객의 업종과 사업 플랜에 가장 완벽하게 부합하는 매물을 찾아드리기 위해
+                        항상 발로 뛰며 정확한 가치 평가와 투명한 권리 분석을 진행합니다.
+                        성공적인 비즈니스의 첫 걸음, 저와 함께 시작하십시오.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 연락처 정보 -->
+            <div class="contact-grid">
+                <div class="glass-card contact-card fade-in" style="transition-delay: 0.1s;">
+                    <i class="fa-solid fa-phone-volume"></i>
+                    <h3>Phone</h3>
+                    <p style="margin-top: 10px; font-size: 1.1rem; color: var(--text-secondary);">
+                        010-5623-2454<br>
+                        055-265-1551
+                    </p>
+                </div>
+
+                <div class="glass-card contact-card fade-in" style="transition-delay: 0.2s;">
+                    <i class="fa-solid fa-fax"></i>
+                    <h3>Fax / Email</h3>
+                    <p style="margin-top: 10px; font-size: 1.1rem; color: var(--text-secondary);">
+                        Fax: 055-600-6886<br>
+                        dk11232@naver.com
+                    </p>
+                </div>
+
+                <div class="glass-card contact-card fade-in" style="transition-delay: 0.3s;">
+                    <i class="fa-solid fa-map-location-dot"></i>
+                    <h3>Office</h3>
+                    <p style="margin-top: 10px; font-size: 1.1rem; color: var(--text-secondary);">
+                        경남 창원시 성산구 완암로 50<br>
+                        넥스동 106호 (SK테크노파크)
+                    </p>
+                </div>
+            </div>
+
+            <!-- 찾아오시는 길 -->
+            <div class="map-container fade-in" style="transition-delay: 0.4s;">
+                <!-- 실제 지도 연동용 iframe이 들어갈 자리 -->
+                <!-- 예시로 구글 지도를 배칭해두었습니다 -->
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3263.26296765795!2d128.64807491524355!3d35.15003508032152!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3568ce75b9f93dbd%3A0xcfabcce3f0bca66a!2zU0vthYzsnazrhbjrjIzwgaw!5e0!3m2!1sko!2skr!4v1689000000000!5m2!1sko!2skr"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fa-solid fa-building fa-2x" style="color: var(--accent-color);"></i>
+                        <div class="logo-text">
+                            <span class="logo-main">SK테크노파크</span>
+                            <span class="logo-sub">공인중개사 사무소</span>
+                        </div>
+                    </div>
+                    <p>등록번호 48123-2020-00028 | 소장: 박성준</p>
+                </div>
+
+                <div class="footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">홈페이지 메인</a></li>
+                        <li><a href="about.html">사무소 소개</a></li>
+                        <li><a href="cases.html">컨설팅 사례 및 홍보</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <ul class="contact-info">
+                        <li><i class="fa-solid fa-phone"></i>
+                            <div>Phone. 010-5623-2454<br>055-265-1551</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> SK테크노파크 공인중개사 사무소. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+
+</html>

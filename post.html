@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사례 보기 | SK테크노파크 공인중개사</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .post-header {
+            padding: 150px 0 60px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .post-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+        }
+
+        .post-category {
+            background-color: var(--accent-color);
+            color: var(--bg-primary);
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-weight: 600;
+        }
+
+        .post-title {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.3;
+            margin-bottom: 20px;
+        }
+
+        .post-body {
+            padding: 60px 0 100px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .post-hero-img {
+            width: 100%;
+            height: auto;
+            max-height: 500px;
+            object-fit: cover;
+            border-radius: var(--border-radius);
+            margin-bottom: 40px;
+            box-shadow: var(--box-shadow);
+        }
+
+        .post-content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .post-content p {
+            margin-bottom: 20px;
+        }
+
+        .post-content h2,
+        .post-content h3 {
+            color: var(--text-main);
+            margin: 40px 0 15px;
+        }
+
+        .back-nav {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 100px 0;
+            color: var(--text-main);
+        }
+
+        @media (max-width: 768px) {
+            .post-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 헤더 / 네비게이션 -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-building fa-2x" style="color: var(--accent-color);"></i>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">사무소 소개</a>
+                <a href="cases.html">컨설팅 사례 및 홍보</a>
+            </nav>
+
+            <button class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 에러 메시지 컨테이너 -->
+    <div id="error-container" style="display: none;">
+        <div class="container error-state">
+            <h1 style="margin-bottom: 20px;">게시글을 찾을 수 없습니다.</h1>
+            <a href="cases.html" class="btn btn-primary">목록으로 돌아가기</a>
+        </div>
+    </div>
+
+    <!-- 내용 렌더링 컨테이너 -->
+    <div id="post-container">
+        <section class="post-header">
+            <div class="container" style="max-width: 800px;">
+                <div class="post-meta fade-in">
+                    <span class="post-category" id="render-category">카테고리</span>
+                    <span id="render-date"><i class="fa-regular fa-calendar"></i> 0000-00-00</span>
+                </div>
+                <h1 class="post-title fade-in" id="render-title" style="transition-delay: 0.1s;">로딩중...</h1>
+            </div>
+        </section>
+
+        <section class="post-body">
+            <div class="container" style="max-width: 800px;">
+                <img src="" id="render-image" alt="게시글 대표 이미지" class="post-hero-img fade-in"
+                    style="transition-delay: 0.2s;">
+
+                <div class="post-content fade-in" id="render-content" style="transition-delay: 0.3s;">
+                    <!-- 내용이 여기에 렌더링 됩니다 -->
+                </div>
+
+                <div class="back-nav fade-in" style="transition-delay: 0.4s;">
+                    <a href="cases.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> 목록으로</a>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <p>등록번호 48123-2020-00028 | 소장: 박성준</p>
+                </div>
+                <div class="footer-links">
+                    <ul>
+                        <li><a href="index.html">홈</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> SK테크노파크 공인중개사
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // URL에서 ID 파라미터 가져오기
+            const urlParams = new URLSearchParams(window.location.search);
+            const postId = urlParams.get('id');
+
+            if (!postId) {
+                showError();
+                return;
+            }
+
+            // data.js에서 데이터 검색
+            const post = getPostById(postId);
+
+            if (post) {
+                // 데이터 렌더링
+                document.title = `${post.title} | SK테크노파크 공인중개사`;
+                document.getElementById('render-category').textContent = post.category;
+                document.getElementById('render-date').innerHTML = `<i class="fa-regular fa-calendar"></i> ${post.date}`;
+                document.getElementById('render-title').textContent = post.title;
+                document.getElementById('render-image').src = post.image;
+
+                // 줄바꿈을 <br>로 변환하여 렌더링 (간단한 처리)
+                const formattedContent = post.content.replace(/\n/g, '<br>');
+                document.getElementById('render-content').innerHTML = `
+                    <p style="font-size: 1.25rem; font-weight: 500; color: var(--text-main); margin-bottom: 40px; padding-bottom: 20px; border-bottom: 1px solid var(--border-color);">
+                        ${post.desc}
+                    </p>
+                    ${formattedContent}
+                `;
+
+                // Fade-in trigger
+                setTimeout(() => {
+                    document.querySelectorAll('.fade-in').forEach(el => el.classList.add('appear'));
+                }, 100);
+
+            } else {
+                showError();
+            }
+        });
+
+        function showError() {
+            document.getElementById('post-container').style.display = 'none';
+            document.getElementById('error-container').style.display = 'block';
+        }
+    </script>
+</body>
+
+</html>

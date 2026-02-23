@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사례 및 홍보 | SK테크노파크 공인중개사</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .page-header {
+            padding: 150px 0 80px;
+            background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+            text-align: center;
+        }
+
+        .board-container {
+            padding: 60px 0 100px;
+        }
+
+        /* Category filters */
+        .category-filters {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 50px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: var(--glass-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 8px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--accent-color);
+            color: var(--bg-primary);
+            border-color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        /* 엠티 스테이트 (게시글 없을 때) */
+        .empty-state {
+            text-align: center;
+            padding: 80px 0;
+            color: var(--text-muted);
+            grid-column: 1 / -1;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 헤더 / 네비게이션 -->
+    <header>
+        <div class="container nav-container">
+            <a href="index.html" class="logo">
+                <i class="fa-solid fa-building fa-2x" style="color: var(--accent-color);"></i>
+                <div class="logo-text">
+                    <span class="logo-main">SK테크노파크</span>
+                    <span class="logo-sub">공인중개사 사무소</span>
+                </div>
+            </a>
+
+            <nav class="nav-links">
+                <a href="index.html">홈</a>
+                <a href="about.html">사무소 소개</a>
+                <a href="cases.html" class="active">컨설팅 사례 및 홍보</a>
+            </nav>
+
+            <button class="mobile-menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- 페이지 헤더 -->
+    <section class="page-header">
+        <div class="container">
+            <h1 class="section-title fade-in">Cases & Insights</h1>
+            <p class="section-subtitle fade-in" style="transition-delay: 0.1s;">SK테크노파크 공인중개사의 업무 사례와 유용한 정보를 확인하세요.</p>
+        </div>
+    </section>
+
+    <!-- 보드 컨테이너 -->
+    <section class="board-container">
+        <div class="container">
+
+            <!-- 추후 확장을 고려한 필터 UI -->
+            <div class="category-filters fade-in" id="filter-container">
+                <button class="filter-btn active" data-filter="all">전체보기</button>
+                <button class="filter-btn" data-filter="컨설팅 사례">컨설팅 사례</button>
+                <button class="filter-btn" data-filter="홍보글">홍보글</button>
+            </div>
+
+            <div class="cases-grid" id="cases-grid">
+                <!-- Javascript (data.js) 를 통해 동적으로 렌더링 됩니다. -->
+            </div>
+
+        </div>
+    </section>
+
+    <!-- 푸터 -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-about">
+                    <div class="logo" style="margin-bottom: 20px;">
+                        <i class="fa-solid fa-building fa-2x" style="color: var(--accent-color);"></i>
+                        <div class="logo-text">
+                            <span class="logo-main">SK테크노파크</span>
+                            <span class="logo-sub">공인중개사 사무소</span>
+                        </div>
+                    </div>
+                    <p>등록번호 48123-2020-00028 | 소장: 박성준</p>
+                </div>
+
+                <div class="footer-links">
+                    <h5>Quick Links</h5>
+                    <ul>
+                        <li><a href="index.html">홈페이지 메인</a></li>
+                        <li><a href="about.html">사무소 소개</a></li>
+                        <li><a href="cases.html">컨설팅 사례 및 홍보</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-contact">
+                    <ul class="contact-info">
+                        <li><i class="fa-solid fa-phone"></i>
+                            <div>Phone. 010-5623-2454<br>055-265-1551</div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                &copy; <span id="year"></span> SK테크노파크 공인중개사 사무소. All Rights Reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Custom JS -->
+    <script src="js/data.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        document.getElementById('year').textContent = new Date().getFullYear();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const grid = document.getElementById('cases-grid');
+            const filters = document.querySelectorAll('.filter-btn');
+            const allPosts = getAllPosts();
+
+            function renderPosts(posts) {
+                if (!posts || posts.length === 0) {
+                    grid.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fa-regular fa-folder-open"></i>
+                            <h3>등록된 게시글이 없습니다.</h3>
+                            <p>새로운 소식이 곧 업데이트 될 예정입니다.</p>
+                        </div>
+                    `;
+                    return;
+                }
+
+                let html = '';
+                posts.forEach((post, index) => {
+                    const delay = index * 0.1;
+                    html += `
+                        <div class="glass-card case-card fade-in" style="padding: 0; overflow: hidden; transition-delay: ${delay}s">
+                            <div class="case-image">
+                                <span class="case-category">${post.category}</span>
+                                <img src="${post.image}" alt="${post.title}">
+                            </div>
+                            <div class="case-content">
+                                <div class="case-date"><i class="fa-regular fa-calendar" style="margin-right:5px;"></i> ${post.date}</div>
+                                <h3 class="case-title">${post.title}</h3>
+                                <p class="case-desc">${post.desc}</p>
+                                <a href="post.html?id=${post.id}" class="case-readmore" style="margin-top:auto;">자세히 보기 <i class="fa-solid fa-angle-right"></i></a>
+                            </div>
+                        </div>
+                    `;
+                });
+                grid.innerHTML = html;
+
+                // Intersection Observer trigger
+                const newItems = grid.querySelectorAll('.fade-in');
+                setTimeout(() => {
+                    newItems.forEach(item => item.classList.add('appear'));
+                }, 100);
+            }
+
+            // 초기 전체 렌더링
+            renderPosts(allPosts);
+
+            // 필터 동작
+            filters.forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // 활성 상태 변경
+                    filters.forEach(f => f.classList.remove('active'));
+                    e.target.classList.add('active');
+
+                    const filterValue = e.target.getAttribute('data-filter');
+
+                    if (filterValue === 'all') {
+                        renderPosts(allPosts);
+                    } else {
+                        const filtered = allPosts.filter(post => post.category === filterValue);
+                        renderPosts(filtered);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
